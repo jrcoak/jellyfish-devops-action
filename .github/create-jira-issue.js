@@ -4,9 +4,9 @@ const axios = require('axios');
   try {
     const response = await axios.post('https://jellythijs.atlassian.net/rest/api/3/issue', {
       fields: {
-        project: { key: 'AGT' }, // Your Jira project key
-        summary: 'Issue Created By Joe GH Action', // Customize summary
-        issuetype: { name: 'Task' }, // Specify issue type
+        project: { key: 'AGT' }, 
+        summary: 'Issue Created By Joe GH Action', 
+        issuetype: { name: 'Task' },
       }
     }, {
       headers: {
@@ -14,7 +14,6 @@ const axios = require('axios');
         'Content-Type': 'application/json'
       }
     });
-    // Output the Issue ID so GitHub Actions can capture it
     const issueId = response.data.key;
     console.log(`::set-output name=issue_id::${issueId}`);
 
