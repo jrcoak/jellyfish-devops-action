@@ -33,7 +33,7 @@ jobs:
               const response = await axios.post('https://jellythijs.atlassian.net/rest/api/3/issue', {
                 fields: {
                   project: { key: 'AGT' }, # Your Jira project key
-                  summary: 'Issue Created By Joe's GH Action',     # Customize summary
+                  summary: 'Issue Created By Joe GH Action',     # Customize summary
                   issuetype: { name: 'Task' },     # Specify issue type
                 }
               }, {
