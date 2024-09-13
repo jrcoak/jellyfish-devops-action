@@ -1,15 +1,15 @@
-name: Link PR to Jira Issue
+name: Link Dependabot PR to Jira Issue
 
 on:
   pull_request:
     types:
       - opened
-    branches:
-      - main  # Specify which branches you want to listen to PRs on
 
 jobs:
   create_jira_issue:
     runs-on: ubuntu-latest
+
+    ##if: github.actor == 'dependabot[bot]'
 
     steps:
     - name: Checkout code
@@ -20,37 +20,17 @@ jobs:
       with:
         node-version: '20'
 
+    - name: Install dependencies
+      run: |
+        npm install axios
+
     - name: Create Jira Issue
       id: create_jira
       run: |
-        npm install axios
-        
-        # Call Jira API to create a new issue
-        ISSUE_ID=$(node -e "
-          const axios = require('axios');
-          (async () => {
-            try {
-              const response = await axios.post('https://jellythijs.atlassian.net/rest/api/3/issue', {
-                fields: {
-                  project: { key: 'AGT' }, # Your Jira project key
-                  summary: 'Issue Created By Joe GH Action',     # Customize summary
-                  issuetype: { name: 'Task' },     # Specify issue type
-                }
-              }, {
-                headers: {
-                  'Authorization': 'Basic ${process.env.JIRA_API_TOKEN}',
-                  'Content-Type': 'application/json'
-                }
-              });
-              console.log(response.data.key);
-            } catch (error) {
-              console.error('Error:', error.response ? error.response.data : error.message);
-              process.exit(1);
-            }
-          })();
-        ")
-        echo "Issue ID: $ISSUE_ID"
-
+        node create-jira-issue.js
+      env:
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+    
     - name: Prepend Jira Issue to PR title
       run: |
         ISSUE_ID=$(echo ${{ steps.create_jira.outputs.issue_id }})
