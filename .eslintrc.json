@@ -7,6 +7,8 @@
       "sourceType": "module",
       "project": "./tsconfig.json"
     },
+
+    #making a change
     "rules": {
       "i18n-text/no-en": "off",
       "eslint-comments/no-use": "off",
