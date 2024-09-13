@@ -14,7 +14,7 @@ inputs:
 Examples: Jenkins, CircleCI'
   referenceId:
     required: true
-    description: A unique identifier for a deployment, such as a git SHA
+    description: HmmmmA unique identifier for a deployment, such as a git SHA
   isSuccessful:
     required: true
     description: Indicates if the deployment succesfully landed in production
