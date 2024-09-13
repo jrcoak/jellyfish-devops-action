@@ -14,7 +14,10 @@ const axios = require('axios');
         'Content-Type': 'application/json'
       }
     });
-    console.log(response.data.key);
+    // Output the Issue ID so GitHub Actions can capture it
+    const issueId = response.data.key;
+    console.log(`::set-output name=issue_id::${issueId}`);
+
   } catch (error) {
     console.error('Error:', error.response ? error.response.data : error.message);
     process.exit(1);
