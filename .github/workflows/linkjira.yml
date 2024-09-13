@@ -37,7 +37,7 @@ jobs:
             }
           }, {
             headers: {
-              'Authorization': 'Basic YOUR_ENCODED_JIRA_API_TOKEN',
+              'Authorization': 'Basic JIRA_API_TOKEN',
               'Content-Type': 'application/json'
             }
           });
