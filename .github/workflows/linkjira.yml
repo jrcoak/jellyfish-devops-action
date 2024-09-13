@@ -27,7 +27,7 @@ jobs:
     - name: Create Jira Issue
       id: create_jira
       run: |
-        node create-jira-issue.js
+        node  .github/create-jira-issue.js
       env:
         JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
     
